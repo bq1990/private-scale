@@ -1,0 +1,9 @@
+[run]
+include = private_scale/*
+omit = *migrations*, *tests*, *docs*, manage.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+
+show_missing = True
