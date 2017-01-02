@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, request, url_for
 
 from .forms import TrackerForm
 
@@ -10,9 +10,11 @@ def home():
     return render_template('home.html')
 
 
-@blueprint.route('/new')
+@blueprint.route('/new', methods=['GET', 'POST'])
 def new():
-    form = TrackerForm()
+    form = TrackerForm(obj=request.form)
+    if form.validate_on_submit():
+        return redirect(url_for('core.tracker', guid='123'))
     return render_template('new.html', form=form)
 
 
