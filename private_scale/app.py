@@ -1,7 +1,10 @@
 from flask import Flask
+from flask_debugtoolbar import DebugToolbarExtension
 
 from . import core
 from .settings import prod
+
+debug_toolbar = DebugToolbarExtension()
 
 
 def create_app(config=prod):
@@ -13,7 +16,7 @@ def create_app(config=prod):
     # db.init_app(app)
 
     app.register_blueprint(core.views.blueprint)
-
+    debug_toolbar.init_app(app)
     return app
 
 app = create_app(prod)

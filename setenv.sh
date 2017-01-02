@@ -1,0 +1,1 @@
+export FLASK_APP=private_scale/app.py
