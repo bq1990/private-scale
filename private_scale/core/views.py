@@ -11,3 +11,8 @@ def home():
 @blueprint.route('/new')
 def new():
     return render_template('new.html')
+
+
+@blueprint.route('/tracker/<guid>')
+def tracker(guid):
+    return render_template('tracker.html')

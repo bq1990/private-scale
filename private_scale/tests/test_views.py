@@ -11,3 +11,7 @@ def test_new(client):
     response = client.get(url_for('core.new'))
     assert response.status_code == 200
 
+
+def test_tracker(client):
+    response = client.get(url_for('core.tracker'))
+    assert response.status_code == 200
