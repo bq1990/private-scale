@@ -4,12 +4,12 @@ from flask.cli import FlaskGroup
 from private_scale.database import db
 
 
-def create_app(info):
+def this_app(info):
     from private_scale.app import create_app
     return create_app()
 
 
-@click.group(cls=FlaskGroup, create_app=create_app)
+@click.group(cls=FlaskGroup, create_app=this_app)
 def cli():
     pass
 
