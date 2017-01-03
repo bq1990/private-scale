@@ -1,9 +1,10 @@
 import uuid
+from datetime import date, timedelta
 
 import factory
 
 from ..database import db
-from ..core.models import Tracker
+from ..core.models import Measurement, Tracker
 
 
 class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
@@ -20,3 +21,11 @@ class TrackerFactory(BaseFactory):
 
     class Meta:
         model = Tracker
+
+
+class MeasurementFactory(BaseFactory):
+    measure_on = factory.Sequence(lambda n: date.today() + timedelta(days=n))
+    pounds = factory.Sequence(lambda n: 150 - n)
+
+    class Meta:
+        model = Measurement
