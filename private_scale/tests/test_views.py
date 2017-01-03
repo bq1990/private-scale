@@ -10,6 +10,13 @@ def test_home(client):
 def test_new(client):
     response = client.get(url_for('core.new'))
     assert response.status_code == 200
+    response = client.post(
+        url_for('core.new'),
+        data=dict(name='test', email='test@test.com'),
+        follow_redirects=False
+    )
+    assert response.status_code == 302
+    assert 'tracker' in response.location
 
 
 def test_tracker(client):
