@@ -1,6 +1,10 @@
+import uuid
+
 from flask import Blueprint, render_template, redirect, request, url_for
 
+from ..database import db
 from .forms import TrackerForm
+from .models import Tracker
 
 blueprint = Blueprint('core', __name__, static_folder="../static")
 
@@ -14,7 +18,12 @@ def home():
 def new():
     form = TrackerForm(obj=request.form)
     if form.validate_on_submit():
-        return redirect(url_for('core.tracker', guid='123'))
+        tracker = Tracker()
+        tracker.guid = str(uuid.uuid3(uuid.NAMESPACE_DNS, 'anon weight'))
+        form.populate_obj(tracker)
+        db.session.add(tracker)
+        db.session.commit()
+        return redirect(url_for('core.tracker', guid=tracker.guid))
     return render_template('new.html', form=form)
 
 
