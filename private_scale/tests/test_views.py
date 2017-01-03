@@ -1,5 +1,7 @@
 from flask import url_for
 
+from .factories import TrackerFactory
+
 
 def test_home(client):
     response = client.get(url_for('core.home'))
@@ -20,5 +22,6 @@ def test_new(client, db):
 
 
 def test_tracker(client):
-    response = client.get(url_for('core.tracker', guid='1234'))
+    tracker = TrackerFactory.create()
+    response = client.get(url_for('core.tracker', guid=tracker.guid))
     assert response.status_code == 200
