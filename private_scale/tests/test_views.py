@@ -7,7 +7,7 @@ def test_home(client):
     assert 'Welcome' in str(response.data)
 
 
-def test_new(client):
+def test_new(client, db):
     response = client.get(url_for('core.new'))
     assert response.status_code == 200
     response = client.post(
