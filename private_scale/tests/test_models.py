@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from ..core.models import Measurement, Tracker
 
@@ -29,4 +29,6 @@ def test_measurement(client, db):
     assert measurement.id
     assert str(measurement) == datetime.strftime(
         measurement.measured_on, '%Y-%m-%d')
+    assert tracker.last_weight() == 123
+    assert tracker.next_date() == date.today() + timedelta(days=1)
 

@@ -40,7 +40,10 @@ def new_measurement(guid):
     tracker = Tracker.query.filter_by(guid=guid).first()
     if not tracker:
         abort(404)
-    form = MeasurementForm(obj=request.form)
+    form = MeasurementForm(
+        obj=request.form,
+        measured_on=tracker.next_date(),
+        pounds=tracker.last_weight())
     if form.validate_on_submit():
         measurement = Measurement(tracker=tracker)
         form.populate_obj(measurement)

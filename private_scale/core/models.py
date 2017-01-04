@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from ..database import db
 
@@ -8,6 +8,16 @@ class Tracker(db.Model):
     guid = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
     email = db.Column(db.String(80))
+
+    def last_weight(self):
+        if self.measurements.all():
+            return self.measurements[0].pounds
+
+    def next_date(self):
+        if self.measurements.all():
+            return self.measurements[0].measured_on + timedelta(days=1)
+        else:
+            return date.today()
 
     def __repr__(self):
         return '{}'.format(self.name)
@@ -26,8 +36,15 @@ class Measurement(db.Model):
     )
 
     __mapper_args__ = {
-        'order_by': measured_on
+        'order_by': 'measured_on desc'
     }
 
     def __repr__(self):
         return '{}'.format(datetime.strftime(self.measured_on, '%Y-%m-%d'))
+
+db.Index(
+    'measurement_unique_dt',
+    Measurement.tracker_id,
+    Measurement.measured_on, unique=True
+)
+
