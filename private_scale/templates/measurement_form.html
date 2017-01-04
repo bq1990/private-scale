@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ form.errors }}
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.measured_on.label }} {{ form.measured_on() }}
+    {{ form.pounds.label }} {{ form.pounds() }}
+    <input type="submit" value="Go">
+</form>
+{% endblock %}

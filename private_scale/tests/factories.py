@@ -7,6 +7,10 @@ from ..database import db
 from ..core.models import Measurement, Tracker
 
 
+def new_guid():
+    return str(uuid.uuid1())
+
+
 class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     class Meta:
@@ -17,7 +21,7 @@ class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
 class TrackerFactory(BaseFactory):
     name = factory.Sequence(lambda n: 'myname-{0}'.format(n))
     email = factory.Sequence(lambda n: 'email-{0}@example.com'.format(n))
-    guid = str(uuid.uuid3(uuid.NAMESPACE_DNS, 'anon weight'))
+    guid = factory.Sequence(lambda n: 'guid-{0}'.format(n))
 
     class Meta:
         model = Tracker

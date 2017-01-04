@@ -1,1 +1,11 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<a href="{{ url_for('core.new_measurement', guid=tracker.guid) }}" class="btn btn-primary pull-xs-right">Add Measurement</a>
+<h1>{{ tracker.name }}</h1>
+<ul>
+{% for measurement in tracker.measurements %}
+    <li>{{ measurement.measured_on }} {{ measurement.pounds }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

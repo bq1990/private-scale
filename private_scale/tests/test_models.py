@@ -1,6 +1,15 @@
-from datetime import date
+from datetime import date, datetime
 
 from ..core.models import Measurement, Tracker
+
+
+def test_tracker(client, db):
+    tracker = Tracker(
+        name='test',
+        email='test@test.com',
+        guid='123'
+    )
+    assert str(tracker) == 'test'
 
 
 def test_measurement(client, db):
@@ -18,3 +27,6 @@ def test_measurement(client, db):
     db.session.add(tracker)
     db.session.commit()
     assert measurement.id
+    assert str(measurement) == datetime.strftime(
+        measurement.measured_on, '%Y-%m-%d')
+
