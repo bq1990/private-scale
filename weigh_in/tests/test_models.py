@@ -1,5 +1,8 @@
 from datetime import date, datetime, timedelta
 
+import pytest
+from sqlalchemy.exc import IntegrityError
+
 from ..core.models import Entry, Log
 
 
@@ -38,3 +41,13 @@ def test_measurement(client, db):
     assert log.next_date() == date.today() + timedelta(days=1)
     assert entry.extra['test'] == 'me'
 
+    entry2 = Entry(
+        measured_on=date.today(),
+        pounds=123,
+        extra={'test': 'me'},
+        log=log
+    )
+    log.entries.append(entry2)
+    db.session.add(log)
+    with pytest.raises(IntegrityError):
+        db.session.commit()
