@@ -1,5 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from sqlalchemy.dialects.postgresql import JSON
+
 from ..database import db
 
 
@@ -8,6 +10,7 @@ class Log(db.Model):
     guid = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
     email = db.Column(db.String(80))
+    extra = db.Column(JSON, nullable=True)
 
     def last_weight(self):
         if self.entries.all():
@@ -28,6 +31,7 @@ class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     measured_on = db.Column(db.Date, default=date.today())
     pounds = db.Column(db.Numeric, nullable=False)
+    extra = db.Column(JSON, nullable=True)
     log_id = db.Column(
         db.Integer, db.ForeignKey('log.id'), nullable=False)
     log = db.relationship(
