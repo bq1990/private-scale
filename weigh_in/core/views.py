@@ -3,6 +3,7 @@ import uuid
 
 from flask import abort, Blueprint, render_template, redirect, request, url_for
 from flask_wtf import FlaskForm
+from sqlalchemy.exc import IntegrityError
 
 from ..database import db
 from .forms import EntryForm, LogForm
@@ -51,8 +52,15 @@ def new_entry(guid):
         entry = Entry(log=log)
         form.populate_obj(entry)
         db.session.add(entry)
-        db.session.commit()
-        return redirect(url_for('core.log_detail', guid=log.guid))
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            form.measured_on.errors.append(
+                'An entry already exists for that date'
+            )
+        else:
+            return redirect(url_for('core.log_detail', guid=log.guid))
     return render_template('new_entry.html', form=form, log=log)
 
 

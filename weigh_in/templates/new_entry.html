@@ -2,21 +2,31 @@
 
 {% block content %}
 <h1>{{ log.name }}</h1>
-{{ form.errors }}
 <form method="POST">
   {{ form.csrf_token }}
   <div class="form-group row">
     <label for="{{ form.measured_on.id }}" class="col-xs-2 col-form-label">{{ form.measured_on.label }}</label>
     <div class="col-xs-10">
       {{ form.measured_on(class='form-control')}}
+      {% if form.measured_on.errors %}
+      <small class="text-danger">
+        {{ form.measured_on.errors[0] }}
+      </small>
+      {% endif %}
     </div>
   </div>
   <div class="form-group row">
     <label for="{{ form.pounds.id }}" class="col-xs-2 col-form-label">{{ form.pounds.label }}</label>
     <div class="col-xs-10">
       {{ form.pounds(class='form-control') }}
+      {% if form.pounds.errors %}
+      <small class="text-danger">
+        {{ form.pounds.errors[0] }}
+      </small>
+      {% endif %}
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}
+

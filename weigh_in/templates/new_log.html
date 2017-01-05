@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ form.errors }}
+<h1>New Weight Log</h1>
 <form method="POST">
   {{ form.csrf_token }}
   <div class="form-group row">
@@ -13,7 +13,13 @@
   <div class="form-group row">
     <label for="example-search-input" class="col-xs-2 col-form-label">{{ form.name.label }}</label>
     <div class="col-xs-10">
-      <input class="form-control" type="text" name="{{ form.name.name }}" id="{{ form.name.id }}">
+      {{ form.name(class='form-control') }}
+      {% if form.name.errors %}
+      <small class="text-danger">
+        {{ form.name.errors[0] }}
+      </small>
+      {% endif %}
+
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Create</button>

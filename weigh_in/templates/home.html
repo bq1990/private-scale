@@ -6,7 +6,6 @@ Welcome
 
 </div>
 <div class="col-xs-12 col-lg-6">
-{{ form.errors }}
 <form method="POST" action="{{ url_for('core.new_log') }}">
     {{ form.csrf_token }}
   <div class="form-group row">
