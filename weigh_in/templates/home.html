@@ -6,22 +6,27 @@
 <p class="lead">A weight tracking site without all the extra crap.</p>
 </div>
 <div class="col-xs-12 col-md-6">
-<h3>Create Your Weight Tracking Log</h3>
-<form method="POST" action="{{ url_for('core.new_log') }}">
-    {{ form.csrf_token }}
-  <div class="form-group row">
-    <label for="example-search-input" class="col-xs-2 col-form-label">{{ form.name.label }}</label>
-    <div class="col-xs-10">
-      <input class="form-control" type="text" name="{{ form.name.name }}" id="{{ form.name.id }}">
-    </div>
+  <div class="card card-block">
+    <h4 class="card-title text-xs-center">Create Your Weight Log</h4>
+    <p class="card-text">Email is totally optional. If you provide your email address, we will send you an email with your unique weight log url. You'll also be able to recover your url later if you forget it.</p>
+    <form method="POST" action="{{ url_for('core.new_log') }}">
+        {{ form.csrf_token }}
+      <div class="form-group row">
+        <label for="example-search-input" class="col-xs-4 col-form-label">{{ form.name.label }}<sup>*</sup></label>
+        <div class="col-xs-8">
+          {{ form.name(class='form-control') }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-text-input" class="col-xs-4 col-form-label">{{ form.email.label }}</label>
+        <div class="col-xs-8">
+          {{ form.email(class='form-control') }}
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-8 offset-xs-4">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
   </div>
-  <div class="form-group row">
-    <label for="example-text-input" class="col-xs-2 col-form-label">{{ form.email.label }}</label>
-    <div class="col-xs-10">
-      <input class="form-control" type="text" name="{{ form.email.name }} id="{{ form.email.id }}">
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Create</button>
-</form>
 </div>
 {% endblock %}
