@@ -8,13 +8,13 @@
   <div class="form-group row">
     <label for="{{ form.measured_on.id }}" class="col-xs-2 col-form-label">{{ form.measured_on.label }}</label>
     <div class="col-xs-10">
-      <input class="form-control" type="text" name="{{ form.measured_on.name }}" id="{{ form.measured_on.id }}">
+      {{ form.measured_on(class='form-control')}}
     </div>
   </div>
   <div class="form-group row">
     <label for="{{ form.pounds.id }}" class="col-xs-2 col-form-label">{{ form.pounds.label }}</label>
     <div class="col-xs-10">
-      <input class="form-control" type="text" name="{{ form.pounds.name }}" id="{{ form.pounds.id }}">
+      {{ form.pounds(class='form-control') }}
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
