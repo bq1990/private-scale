@@ -5,7 +5,7 @@
 <h1>{{ log.name }}</h1>
 <ul>
 {% for entry in log.entries %}
-    <li>{{ entry.measured_on }} {{ entry.pounds }}</li>
+    <li>{{ entry.measured_on }} {{ entry.pounds }} lbs <a href="{{ url_for('core.delete_entry', guid=log.guid, entry_date=entry.measured_on) }}">delete</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

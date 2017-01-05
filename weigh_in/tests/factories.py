@@ -28,7 +28,7 @@ class LogFactory(BaseFactory):
 
 
 class EntryFactory(BaseFactory):
-    measure_on = factory.Sequence(lambda n: date.today() + timedelta(days=n))
+    measured_on = factory.Sequence(lambda n: date.today() + timedelta(days=n))
     pounds = factory.Sequence(lambda n: 150 - n)
 
     class Meta:

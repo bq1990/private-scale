@@ -1,6 +1,8 @@
+from dateutil.parser import parse
 import uuid
 
 from flask import abort, Blueprint, render_template, redirect, request, url_for
+from flask_wtf import FlaskForm
 
 from ..database import db
 from .forms import EntryForm, LogForm
@@ -53,4 +55,20 @@ def new_entry(guid):
         return redirect(url_for('core.log_detail', guid=log.guid))
     return render_template('new_entry.html', form=form, log=log)
 
+
+@blueprint.route('/log/<guid>/<entry_date>/delete', methods=['GET', 'POST'])
+def delete_entry(guid, entry_date):
+    log = Log.query.filter_by(guid=guid).first()
+    if not log:
+        abort(404)
+    entry_date = parse(entry_date).date()
+    entry = next((e for e in log.entries if e.measured_on == entry_date), None)
+    if not entry:
+        abort(404)
+    form = FlaskForm(obj=request.form)
+    if form.validate_on_submit():
+        db.session.delete(entry)
+        db.session.commit()
+        return redirect(url_for('core.log_detail', guid=log.guid))
+    return render_template('delete_entry.html', form=form, entry=entry)
 
