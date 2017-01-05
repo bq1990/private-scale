@@ -1,5 +1,5 @@
 [run]
-include = private_scale/*
+include = weigh_in/*
 omit = *migrations*, *tests*, *docs*, manage.py
 
 [report]

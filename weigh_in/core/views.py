@@ -11,7 +11,8 @@ blueprint = Blueprint('core', __name__, static_folder="../static")
 
 @blueprint.route('/')
 def home():
-    return render_template('home.html')
+    form = LogForm(obj=request.form)
+    return render_template('home.html', form=form)
 
 
 @blueprint.route('/new', methods=['GET', 'POST'])
@@ -50,6 +51,6 @@ def new_entry(guid):
         db.session.add(entry)
         db.session.commit()
         return redirect(url_for('core.log_detail', guid=log.guid))
-    return render_template('entry_form.html', form=form, log=log)
+    return render_template('new_entry.html', form=form, log=log)
 
 

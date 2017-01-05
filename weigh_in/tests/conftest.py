@@ -1,8 +1,8 @@
 import pytest
 
-from private_scale.app import create_app
-from private_scale.database import db as _db
-from private_scale.settings import test
+from weigh_in.app import create_app
+from weigh_in.database import db as _db
+from weigh_in.settings import test
 
 
 @pytest.yield_fixture(scope='module')

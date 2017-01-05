@@ -1,11 +1,11 @@
 import click
 from flask.cli import FlaskGroup
 
-from private_scale.database import db
+from weigh_in.database import db
 
 
 def this_app(info):
-    from private_scale.app import create_app
+    from weigh_in.app import create_app
     return create_app()
 
 

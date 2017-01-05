@@ -4,3 +4,4 @@ SECRET_KEY = 'another string'
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/privatescale'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+APP_NAME = 'Weigh-In'

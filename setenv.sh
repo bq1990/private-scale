@@ -1,1 +1,1 @@
-export FLASK_APP=private_scale/app.py
+export FLASK_APP=weigh_in/app.py
