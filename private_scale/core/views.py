@@ -3,8 +3,8 @@ import uuid
 from flask import abort, Blueprint, render_template, redirect, request, url_for
 
 from ..database import db
-from .forms import MeasurementForm, TrackerForm
-from .models import Measurement, Tracker
+from .forms import EntryForm, LogForm
+from .models import Entry, Log
 
 blueprint = Blueprint('core', __name__, static_folder="../static")
 
@@ -15,41 +15,41 @@ def home():
 
 
 @blueprint.route('/new', methods=['GET', 'POST'])
-def new():
-    form = TrackerForm(obj=request.form)
+def new_log():
+    form = LogForm(obj=request.form)
     if form.validate_on_submit():
-        tracker = Tracker()
-        tracker.guid = str(uuid.uuid1())
-        form.populate_obj(tracker)
-        db.session.add(tracker)
+        log = Log()
+        log.guid = str(uuid.uuid1())
+        form.populate_obj(log)
+        db.session.add(log)
         db.session.commit()
-        return redirect(url_for('core.tracker', guid=tracker.guid))
-    return render_template('new.html', form=form)
+        return redirect(url_for('core.log_detail', guid=log.guid))
+    return render_template('new_log.html', form=form)
 
 
-@blueprint.route('/tracker/<guid>')
-def tracker(guid):
-    tracker = Tracker.query.filter_by(guid=guid).first()
-    if not tracker:
+@blueprint.route('/log/<guid>')
+def log_detail(guid):
+    log = Log.query.filter_by(guid=guid).first()
+    if not log:
         abort(404)
-    return render_template('tracker.html', tracker=tracker)
+    return render_template('log_detail.html', log=log)
 
 
-@blueprint.route('/tracker/<guid>/new', methods=['GET', 'POST'])
-def new_measurement(guid):
-    tracker = Tracker.query.filter_by(guid=guid).first()
-    if not tracker:
+@blueprint.route('/log/<guid>/new', methods=['GET', 'POST'])
+def new_entry(guid):
+    log = Log.query.filter_by(guid=guid).first()
+    if not log:
         abort(404)
-    form = MeasurementForm(
+    form = EntryForm(
         obj=request.form,
-        measured_on=tracker.next_date(),
-        pounds=tracker.last_weight())
+        measured_on=log.next_date(),
+        pounds=log.last_weight())
     if form.validate_on_submit():
-        measurement = Measurement(tracker=tracker)
-        form.populate_obj(measurement)
-        db.session.add(measurement)
+        entry = Entry(log=log)
+        form.populate_obj(entry)
+        db.session.add(entry)
         db.session.commit()
-        return redirect(url_for('core.tracker', guid=tracker.guid))
-    return render_template('measurement_form.html', form=form, tracker=tracker)
+        return redirect(url_for('core.log_detail', guid=log.guid))
+    return render_template('entry_form.html', form=form, log=log)
 
 

@@ -3,19 +3,19 @@ from datetime import date, datetime, timedelta
 from ..database import db
 
 
-class Tracker(db.Model):
+class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     guid = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
     email = db.Column(db.String(80))
 
     def last_weight(self):
-        if self.measurements.all():
-            return self.measurements[0].pounds
+        if self.entries.all():
+            return self.entries[0].pounds
 
     def next_date(self):
-        if self.measurements.all():
-            return self.measurements[0].measured_on + timedelta(days=1)
+        if self.entries.all():
+            return self.entries[0].measured_on + timedelta(days=1)
         else:
             return date.today()
 
@@ -23,16 +23,16 @@ class Tracker(db.Model):
         return '{}'.format(self.name)
 
 
-class Measurement(db.Model):
+class Entry(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     measured_on = db.Column(db.Date, default=date.today())
     pounds = db.Column(db.Numeric, nullable=False)
-    tracker_id = db.Column(
-        db.Integer, db.ForeignKey('tracker.id'), nullable=False)
-    tracker = db.relationship(
-        'Tracker',
-        backref=db.backref('measurements', lazy='dynamic')
+    log_id = db.Column(
+        db.Integer, db.ForeignKey('log.id'), nullable=False)
+    log = db.relationship(
+        'Log',
+        backref=db.backref('entries', lazy='dynamic')
     )
 
     __mapper_args__ = {
@@ -43,8 +43,7 @@ class Measurement(db.Model):
         return '{}'.format(datetime.strftime(self.measured_on, '%Y-%m-%d'))
 
 db.Index(
-    'measurement_unique_dt',
-    Measurement.tracker_id,
-    Measurement.measured_on, unique=True
+    'entry_unique_dt',
+    Entry.log_id,
+    Entry.measured_on, unique=True
 )
-

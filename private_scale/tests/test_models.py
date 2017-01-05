@@ -1,34 +1,34 @@
 from datetime import date, datetime, timedelta
 
-from ..core.models import Measurement, Tracker
+from ..core.models import Entry, Log
 
 
-def test_tracker(client, db):
-    tracker = Tracker(
+def test_log(client, db):
+    log = Log(
         name='test',
         email='test@test.com',
         guid='123'
     )
-    assert str(tracker) == 'test'
+    assert str(log) == 'test'
 
 
 def test_measurement(client, db):
-    tracker = Tracker(
+    log = Log(
         name='test',
         email='test@test.com',
         guid='123'
     )
-    measurement = Measurement(
+    entry = Entry(
         measured_on=date.today(),
         pounds=123,
-        tracker=tracker
+        log=log
     )
-    tracker.measurements.append(measurement)
-    db.session.add(tracker)
+    log.entries.append(entry)
+    db.session.add(log)
     db.session.commit()
-    assert measurement.id
-    assert str(measurement) == datetime.strftime(
-        measurement.measured_on, '%Y-%m-%d')
-    assert tracker.last_weight() == 123
-    assert tracker.next_date() == date.today() + timedelta(days=1)
+    assert entry.id
+    assert str(entry) == datetime.strftime(
+        entry.measured_on, '%Y-%m-%d')
+    assert log.last_weight() == 123
+    assert log.next_date() == date.today() + timedelta(days=1)
 

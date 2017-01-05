@@ -1,9 +1,9 @@
-from ..core.forms import TrackerForm
+from ..core.forms import LogForm
 
 
 def test_trackerform(client):
-    form = TrackerForm(csrf_enabled=False)
+    form = LogForm(csrf_enabled=False)
     assert form.validate() is False
 
-    form = TrackerForm(csrf_enabled=False, name='test', email='test@test.com')
+    form = LogForm(csrf_enabled=False, name='test', email='test@test.com')
     assert form.validate() is True

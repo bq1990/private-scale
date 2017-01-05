@@ -1,15 +1,13 @@
-from datetime import date
-
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, DecimalField
 from wtforms.validators import DataRequired
 
 
-class TrackerForm(FlaskForm):
+class LogForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     email = StringField('email')
 
 
-class MeasurementForm(FlaskForm):
+class EntryForm(FlaskForm):
     measured_on = DateField('Date', validators=[DataRequired()])
     pounds = DecimalField('Weight', validators=[DataRequired()])

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{{ url_for('core.new_entry', guid=log.guid) }}" class="btn btn-primary pull-xs-right">Weigh In</a>
+<h1>{{ log.name }}</h1>
+<ul>
+{% for entry in log.entries %}
+    <li>{{ entry.measured_on }} {{ entry.pounds }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
