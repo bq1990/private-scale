@@ -31,6 +31,7 @@ def test_log_detail(client):
 
 def test_new_entry(client, db):
     log = LogFactory.create()
+
     response = client.get(url_for('core.new_entry', guid=log.guid))
     assert response.status_code == 200
     response = client.post(
@@ -41,8 +42,17 @@ def test_new_entry(client, db):
     assert response.status_code == 302
     assert 'log' in response.location
     assert len(log.entries.all()) == 1
+
     response = client.get(url_for('core.new_entry', guid='invalid'))
     assert response.status_code == 404
+
+    response = client.post(
+        url_for('core.new_entry', guid=log.guid),
+        data=dict(measured_on='2017-1-1', pounds='99'),
+        follow_redirects=False
+    )
+    assert response.status_code == 200
+    assert 'An entry already exists for that date' in str(response.data)
 
 
 def test_delete_entry(client, db):
