@@ -20,7 +20,6 @@ class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
 
 class LogFactory(BaseFactory):
     name = factory.Sequence(lambda n: 'myname-{0}'.format(n))
-    email = factory.Sequence(lambda n: 'email-{0}@example.com'.format(n))
     guid = factory.Sequence(lambda n: 'guid-{0}'.format(n))
 
     class Meta:

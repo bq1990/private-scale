@@ -8,19 +8,13 @@
 <div class="col-xs-12 col-md-6">
   <div class="card card-block">
     <h4 class="card-title text-xs-center">Create Your Weight Log</h4>
-    <p class="card-text">Email is totally optional. If you provide your email address, we will send you an email with your unique weight log url. You'll also be able to recover your url later if you forget it.</p>
+    <p class="card-text">Lorem ipsum</p>
     <form method="POST" action="{{ url_for('core.new_log') }}">
         {{ form.csrf_token }}
       <div class="form-group row">
         <label for="example-search-input" class="col-xs-4 col-form-label">{{ form.name.label }}<sup>*</sup></label>
         <div class="col-xs-8">
           {{ form.name(class='form-control') }}
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="example-text-input" class="col-xs-4 col-form-label">{{ form.email.label }}</label>
-        <div class="col-xs-8">
-          {{ form.email(class='form-control') }}
         </div>
       </div>
       <div class="form-group row">

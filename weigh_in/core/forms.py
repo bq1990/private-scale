@@ -5,8 +5,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 class LogForm(FlaskForm):
     name = StringField('Log Title', validators=[DataRequired()],
-        default='My Awesome Weight Progress')
-    email = StringField('My Email')
+                       default='My Awesome Weight Progress')
 
 
 class EntryForm(FlaskForm):

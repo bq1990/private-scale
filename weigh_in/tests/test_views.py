@@ -1,4 +1,4 @@
-from flask import url_for
+from flask import current_app, url_for
 
 from .factories import EntryFactory, LogFactory
 
@@ -6,7 +6,7 @@ from .factories import EntryFactory, LogFactory
 def test_home(client):
     response = client.get(url_for('core.home'))
     assert response.status_code == 200
-    assert 'Welcome' in str(response.data)
+    assert current_app.config['APP_NAME'] in str(response.data)
 
 
 def test_new_log(client, db):
@@ -14,7 +14,7 @@ def test_new_log(client, db):
     assert response.status_code == 200
     response = client.post(
         url_for('core.new_log'),
-        data=dict(name='test', email='test@test.com'),
+        data=dict(name='test'),
         follow_redirects=False
     )
     assert response.status_code == 302

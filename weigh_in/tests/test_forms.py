@@ -4,10 +4,10 @@ from ..core.forms import EntryForm, LogForm
 
 
 def test_logform(client):
-    form = LogForm(csrf_enabled=False)
+    form = LogForm(csrf_enabled=False, name='')
     assert form.validate() is False
 
-    form = LogForm(csrf_enabled=False, name='test', email='test@test.com')
+    form = LogForm(csrf_enabled=False, name='test')
     assert form.validate() is True
 
 

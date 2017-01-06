@@ -9,7 +9,6 @@ class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     guid = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
-    email = db.Column(db.String(80))
     extra = db.Column(JSON, nullable=True)
 
     def last_weight(self):

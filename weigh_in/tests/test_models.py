@@ -9,7 +9,6 @@ from ..core.models import Entry, Log
 def test_log(client, db):
     log = Log(
         name='test',
-        email='test@test.com',
         guid='123',
         extra={'test': 'me'}
     )
@@ -22,7 +21,6 @@ def test_log(client, db):
 def test_measurement(client, db):
     log = Log(
         name='test',
-        email='test@test.com',
         guid='1234'
     )
     entry = Entry(
