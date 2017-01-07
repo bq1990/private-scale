@@ -1,3 +1,5 @@
+from .common import *
+
 DEBUG = False
 TESTING = True
 WTF_CSRF_ENABLED = False  # Allows form testing

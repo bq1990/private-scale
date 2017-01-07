@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
+from flask_wtf.recaptcha import RecaptchaField
 from wtforms import StringField, DateField, DecimalField
 from wtforms.validators import DataRequired, ValidationError
 
 
 class LogForm(FlaskForm):
-    name = StringField('Log Title', validators=[DataRequired()],
-                       default='My Awesome Weight Progress')
+    name = StringField('Weight Log Title', validators=[DataRequired()])
+    recaptcha = RecaptchaField()
 
 
 class EntryForm(FlaskForm):

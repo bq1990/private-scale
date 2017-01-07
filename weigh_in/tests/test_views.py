@@ -9,11 +9,9 @@ def test_home(client):
     assert current_app.config['APP_NAME'] in str(response.data)
 
 
-def test_new_log(client, db):
-    response = client.get(url_for('core.new_log'))
-    assert response.status_code == 200
+def test_home_new_log(client, db):
     response = client.post(
-        url_for('core.new_log'),
+        url_for('core.home'),
         data=dict(name='test'),
         follow_redirects=False
     )

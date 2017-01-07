@@ -12,14 +12,8 @@ from .models import Entry, Log
 blueprint = Blueprint('core', __name__, static_folder="../static")
 
 
-@blueprint.route('/')
+@blueprint.route('/', methods=['GET', 'POST'])
 def home():
-    form = LogForm()
-    return render_template('home.html', form=form)
-
-
-@blueprint.route('/new', methods=['GET', 'POST'])
-def new_log():
     form = LogForm(obj=request.form)
     if form.validate_on_submit():
         log = Log()
@@ -28,7 +22,7 @@ def new_log():
         db.session.add(log)
         db.session.commit()
         return redirect(url_for('core.log_detail', guid=log.guid))
-    return render_template('new_log.html', form=form)
+    return render_template('home.html', form=form)
 
 
 @blueprint.route('/log/<guid>')
