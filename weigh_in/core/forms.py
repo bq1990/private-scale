@@ -10,7 +10,7 @@ class LogForm(FlaskForm):
 
 
 class EntryForm(FlaskForm):
-    measured_on = DateField('Date')
+    measured_on = StringField('Date')
     pounds = DecimalField('Weight')
 
     def validate_pounds(form, field):

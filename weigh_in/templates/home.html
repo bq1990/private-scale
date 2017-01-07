@@ -13,7 +13,7 @@
   {{ form.csrf_token }}
   <div class="form-group">
     <label for="example-search-input" class="col-form-label">{{ form.name.label }}<sup>*</sup></label>
-      {{ form.name(class='form-control', required=True) }}
+      {{ form.name(class='form-control', required=True, placeholder="My Awesome Weight Loss Log") }}
       {% if form.name.errors %}
       <small class="text-danger">
         {{ form.name.errors[0] }}
@@ -49,6 +49,5 @@ $(function() {
      }
   });
 });
-
 </script>
 {% endblock %}
