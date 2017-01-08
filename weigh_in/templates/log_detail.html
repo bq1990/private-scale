@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{{ url_for('core.new_entry', guid=log.guid) }}" class="btn btn-primary pull-xs-right">Weigh In</a>
 <h1>{{ log.name }}</h1>
+<div class="col-xs-12">
+  <a href="{{ url_for('core.new_entry', guid=log.guid) }}" class="btn btn-primary pull-xs-right">Weigh In</a>
+</div>
 <ul>
 {% for entry in log.entries %}
     <li>{{ entry.measured_on }} {{ entry.pounds }} lbs <a href="{{ url_for('core.delete_entry', guid=log.guid, entry_date=entry.measured_on) }}">delete</a></li>
