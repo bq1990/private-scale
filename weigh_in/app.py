@@ -21,4 +21,3 @@ def create_app(config=common):
         SSLify(app)
     return app
 
-# app = create_app()

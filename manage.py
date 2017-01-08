@@ -15,7 +15,6 @@ def this_app(info):
         config = test
     else:
         config = common
-        print('dev')
     return create_app(config)
 
 
