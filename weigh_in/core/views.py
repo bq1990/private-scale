@@ -1,7 +1,8 @@
 from dateutil.parser import parse
 import uuid
 
-from flask import abort, Blueprint, render_template, redirect, request, url_for
+from flask import (abort, Blueprint, current_app, render_template, redirect,
+                   request, send_from_directory, url_for)
 from flask_wtf import FlaskForm
 from sqlalchemy.exc import IntegrityError
 
@@ -74,3 +75,7 @@ def delete_entry(guid, entry_date):
         return redirect(url_for('core.log_detail', guid=log.guid))
     return render_template('delete_entry.html', form=form, entry=entry)
 
+
+@blueprint.route('/robots.txt')
+def robots_txt():
+    return send_from_directory(current_app.static_folder, request.path[1:])
