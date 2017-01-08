@@ -1,12 +1,22 @@
+import os
+
 import click
 from flask.cli import FlaskGroup
 
 from weigh_in.database import db
+from weigh_in.settings import common, prod, test
 
 
 def this_app(info):
     from weigh_in.app import create_app
-    return create_app()
+    if os.getenv('ENV') == 'prod':
+        config = prod
+    elif os.getenv('ENV') == 'test':
+        config = test
+    else:
+        config = common
+        print('dev')
+    return create_app(config)
 
 
 @click.group(cls=FlaskGroup, create_app=this_app)
