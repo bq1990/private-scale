@@ -1,14 +1,9 @@
-import uuid
 from datetime import date, timedelta
 
 import factory
 
 from ..database import db
 from ..core.models import Entry, Log
-
-
-def new_guid():
-    return str(uuid.uuid1())
 
 
 class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
