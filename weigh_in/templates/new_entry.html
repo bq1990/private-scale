@@ -26,7 +26,10 @@
       {% endif %}
     </div>
   </div>
+  <div class="form-group row">
   <button type="submit" class="btn btn-primary">Submit</button>
+  <a href="{{ url_for('core.log_detail', guid=log.guid) }}" class="btn btn-default">Cancel</cancel>
+  </div>
 </form>
 {% endblock %}
 

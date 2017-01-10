@@ -5,6 +5,8 @@
   {{ form.csrf_token }}
   <p>Confirm delete {{ entry }}?
     <button type="submit" class="btn btn-primary">OK</button>
+    <a href="{{ url_for('core.log_detail', guid=entry.log.guid) }}" class="btn btn-default">Cancel</cancel>
+
   </p>
 </form>
 {% endblock %}
