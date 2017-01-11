@@ -11,6 +11,8 @@ Tested on Python 3.5.1
 
 git clone git@github.com:bq1990/weigh-in.git
 
+cd weigh-in
+
 mkvirtualenv -p /usr/local/bin/python3 weigh-in
 
 pip install -r requirements.txt
