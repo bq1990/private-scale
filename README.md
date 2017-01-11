@@ -5,7 +5,7 @@ obscurity instead of registration/login.
 
 Flask, Postgres
 
-Testing on Python 3.5.1
+Tested on Python 3.5.1
 
 ## Installation
 
