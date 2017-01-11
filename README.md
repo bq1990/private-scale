@@ -27,6 +27,8 @@ python manage.py create_all
 
 python manage.py run --reload
 
+http://localhost:5000
+
 ## Testing
 
 createdb weigh_in_test
