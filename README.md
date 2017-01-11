@@ -17,9 +17,9 @@ pip install -r requirements.txt
 
 createdb weigh_in
 
-python manage.py create_all
-
 source setenv.sh
+
+python manage.py create_all
 
 python manage.py run --reload
 
