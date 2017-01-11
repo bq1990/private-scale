@@ -2,7 +2,7 @@ import os
 from .common import *
 
 
-APP_NAME = 'Weigh-In'
+APP_NAME = os.getenv('APP_NAME', 'Weigh-In')
 DEBUG = False
 
 WTF_CSRF_SECRET_KEY = os.getenv('WTF_CSRF_SECRET_KEY')
