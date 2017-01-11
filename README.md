@@ -5,11 +5,13 @@ obscurity instead of registration/login.
 
 Flask, Postgres
 
+Testing on Python 3.5.1
+
 ## Installation
 
 git clone git@github.com:bq1990/weigh-in.git
 
-mkvirtualenv weigh-in
+mkvirtualenv -p /usr/local/bin/python3 weigh-in
 
 pip install -r requirements.txt
 
