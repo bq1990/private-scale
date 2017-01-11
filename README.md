@@ -9,7 +9,7 @@ Flask, Postgres
 
 git clone git@github.com:bq1990/weigh-in.git
 
-<create venv>
+mkvirtualenv weigh-in
 
 pip install -r requirements.txt
 
