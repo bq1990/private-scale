@@ -21,9 +21,11 @@ source setenv.sh
 
 python manage.py create_all
 
+## Run development server
+
 python manage.py run --reload
 
-## Tests
+## Testing
 
 createdb weigh_in_test
 
