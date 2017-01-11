@@ -14,6 +14,7 @@ git clone git@github.com:bq1990/weigh-in.git
 pip install -r requirements.txt
 
 createdb weigh_in
+
 createdb weigh_in_test
 
 source setenv.sh
