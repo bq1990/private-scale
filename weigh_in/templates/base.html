@@ -61,7 +61,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <div class="row">
-        <div class="col-x2-12">
+        <div class="col-xs-12">
           {% for category, message in messages %}
           <div class="alert alert-{{ category }}">
             <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>

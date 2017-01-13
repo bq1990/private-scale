@@ -1,36 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ log.name }}</h1>
-<form method="POST">
-  {{ form.csrf_token }}
-  <div class="form-group row">
-    <label for="{{ form.measured_on.id }}" class="col-xs-2 col-form-label">{{ form.measured_on.label }}</label>
-    <div class="col-xs-10">
-      {{ form.measured_on(class='form-control flatpickr', required=True)}}
-      {% if form.measured_on.errors %}
-      <small class="text-danger">
-        {{ form.measured_on.errors[0] }}
-      </small>
-      {% endif %}
+<div class="col-xs-12">
+  <h1 style="text-align: center;">{{ log.name }}</h1>
+  <form method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group row">
+      <label for="{{ form.measured_on.id }}" class="col-xs-2 col-form-label">{{ form.measured_on.label }}</label>
+      <div class="col-xs-10">
+        {{ form.measured_on(class='form-control flatpickr', required=True)}}
+        {% if form.measured_on.errors %}
+        <small class="text-danger">
+          {{ form.measured_on.errors[0] }}
+        </small>
+        {% endif %}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="{{ form.pounds.id }}" class="col-xs-2 col-form-label">{{ form.pounds.label }}</label>
-    <div class="col-xs-10">
-      {{ form.pounds(class='form-control', required=True) }}
-      {% if form.pounds.errors %}
-      <small class="text-danger">
-        {{ form.pounds.errors[0] }}
-      </small>
-      {% endif %}
+    <div class="form-group row">
+      <label for="{{ form.pounds.id }}" class="col-xs-2 col-form-label">{{ form.pounds.label }}</label>
+      <div class="col-xs-10">
+        {{ form.pounds(class='form-control', required=True) }}
+        {% if form.pounds.errors %}
+        <small class="text-danger">
+          {{ form.pounds.errors[0] }}
+        </small>
+        {% endif %}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-  <button type="submit" class="btn btn-primary">Submit</button>
-  <a href="{{ url_for('core.log_detail', guid=log.guid) }}" class="btn btn-default">Cancel</cancel>
-  </div>
-</form>
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{{ url_for('core.log_detail', guid=log.guid) }}" class="btn btn-default">Cancel</a>
+    </div>
+  </form>
+</div>
 {% endblock %}
 
 {% block javascript %}
