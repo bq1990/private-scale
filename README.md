@@ -25,8 +25,11 @@ $source setenv.sh
 
 $python manage.py create_all
 
+```
+
 ## Run development server
 
+```
 $python manage.py run --reload
 ```
 
