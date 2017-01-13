@@ -1,8 +1,9 @@
 from dateutil.parser import parse
 import uuid
 
-from flask import (abort, Blueprint, current_app, render_template, redirect,
-                   request, send_from_directory, url_for)
+from flask import (abort, Blueprint, current_app, flash, Markup,
+                   render_template, redirect, request, send_from_directory,
+                   url_for)
 from flask_wtf import FlaskForm
 from sqlalchemy.exc import IntegrityError
 
@@ -22,6 +23,11 @@ def home():
         form.populate_obj(log)
         db.session.add(log)
         db.session.commit()
+        ext_url = url_for('core.log_detail', guid=log.guid, _external=True)
+        msg = ('Here is your unique url to access your weight log: '
+               '<strong>{}</strong>.<br/>'
+               'Please save or bookmark it now!').format(ext_url)
+        flash(Markup(msg), 'success')
         return redirect(url_for('core.log_detail', guid=log.guid))
     return render_template('home.html', form=form)
 
