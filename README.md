@@ -1,10 +1,11 @@
 # weigh-in
 
-Multi-user web application providing simple weight tracking. Uses security by
-obscurity instead of registration/login.
+A multi-user web application providing simple weight tracking. Uses security by obscurity instead of registration/login.
 
 Built with Flask and Postgres. Utilizes some common Flask extensions, including
 Flask-SQLAlchemy and Flask-WTF.
+
+Responsive layout created with Bootstrap 4, and a couple lines of JQuery.
 
 Tested on Python 3.5.1
 
