@@ -61,7 +61,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-x2-12">
           {% for category, message in messages %}
           <div class="alert alert-{{ category }}">
             <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
@@ -73,13 +73,10 @@
       {% endif %}
     {% endwith %}
 
-      <div class="row">
-        <div class="col-xs-12">
-        {% block content %}
-          <p>Use this document as a way to quick start any new project.</p>
-        {% endblock %}
-        </div>
-      </div>
+    <div class="row">
+      {% block content %}
+      {% endblock %}
+    </div>
 
 
     </div> <!-- /container -->
