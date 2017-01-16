@@ -1,5 +1,7 @@
 # weigh-in
 
+This project is a work in progress.
+
 A multi-user web application providing simple weight tracking. Uses security by obscurity instead of registration/login.
 
 Built with Flask and Postgres. Utilizes some common Flask extensions, including
