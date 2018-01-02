@@ -10,7 +10,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 col-md-4">
     <div>
       <ul>
       {% for entry in log.entries %}
@@ -19,5 +19,61 @@
       </ul>
     </div>
   </div>
+  <div id="container" class="col-xs-12 col-md-8">
+  </div>
 </div>
+{% endblock %}
+{% block extrajs %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+Highcharts.chart('container', {
+    chart: {
+        type: 'spline'
+    },
+    title: {
+        text: 'Weight History'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        type: 'datetime',
+        minTickInterval: 24 * 3600 * 1000,
+        dateTimeLabelFormats: {
+          second: '%H:%M:%S',
+          minute: '%H:%M',
+          hour: '%H:%M',
+          day: '%b %e %y',
+          week: '%b %e',
+          month: '%b \'%y',
+          year: '%Y'
+        },
+        title: {
+            text: 'Date'
+        },
+    },
+    yAxis: {
+        title: {
+            text: 'Pounds'
+        },
+        min: 0
+    },
+    tooltip: {
+    },
+
+    plotOptions: {
+        spline: {
+            marker: {
+                enabled: true
+            }
+        }
+    },
+    label: { enabled: false},
+    series: [{
+        showInLegend: false,
+        name: 'Weight',
+        data: [{% for entry in log.entries %}[Date.UTC({{ entry.measured_on.year }}, {{ entry.measured_on.month }}, {{ entry.measured_on.day }}), {{ entry.pounds }}],{% endfor %}]
+    }]
+});
+</script>
 {% endblock %}
