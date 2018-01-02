@@ -17,6 +17,8 @@ blueprint = Blueprint('core', __name__, static_folder="../static")
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
     form = LogForm(obj=request.form)
+    if not current_app.config.get('RECAPTCHA_ON'):
+        del form.recaptcha
     if form.validate_on_submit():
         log = Log()
         log.guid = str(uuid.uuid1())

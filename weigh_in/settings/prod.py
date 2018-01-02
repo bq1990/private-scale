@@ -11,6 +11,7 @@ WTF_CSRF_SECRET_KEY = 'a random string'
 SECRET_KEY = os.getenv('SECRET_KEY', 'another secret key')
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_ON = True
 
 if os.environ.get('DATABASE_URL'):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')

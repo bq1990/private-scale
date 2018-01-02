@@ -34,14 +34,16 @@
       {% endif %}
 
   </div>
+  {% if form.recaptcha %}
   <div class="form-group">
-      {{ form.recaptcha(required=True) }}
+      {{ form.recaptcha(required=False) }}
       <small id="recaptcha-error" class="text-danger">
       {% if form.recaptcha.errors %}
       reCAPTCHA is required
       {% endif %}
       </small>
   </div>
+  {% endif %}
   <div class="form-group">
       <button type="submit" class="btn btn-primary btn-lg btn-block">Create</button>
     </div>
